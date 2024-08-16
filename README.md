@@ -1,4 +1,4 @@
-# IndexedJobs.com Development Overview
+# Overview
 
 IndexedJobs.com (actual domain TBA) is a job board populated with scraped job postings from Indeed. A large language model applies tags to each job posting based on its description. Examples of tags include “Company is/isn’t run by a female CEO” or “Company requires you to wear suits in the office.” The goal is to enable job applicants to quickly find jobs that match their preferences on unusual metrics.
 
@@ -6,7 +6,7 @@ IndexedJobs.com (actual domain TBA) is a job board populated with scraped job po
 
 - **Frontend:** Next.js
 - **Database:** Postgres (via Supabase)
-- **Backend:** AWS Lambda script running every 24 hours to:
+- **Backend:** AWS Lambda script (https://github.com/maxawzsinger/indexedjobs.com-scraper) running every 24 hours to:
   - Scrape job postings.
   - Post to OpenAI batch processing API.
   - Retrieve results and upload them to Supabase.
