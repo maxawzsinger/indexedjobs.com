@@ -2,6 +2,8 @@
 
 IndexedJobs.com (actual domain TBA) is a job board populated with scraped job postings from Indeed. A large language model applies tags to each job posting based on its description. Examples of tags include “Company is/isn’t run by a female CEO” or “Company requires you to wear suits in the office.” The goal is to enable job applicants to quickly find jobs that match their preferences on unusual metrics.
 
+Demo: https://indexedjobs-com.vercel.app/jobs/au
+
 ## Tech Stack
 
 - **Frontend:** Next.js
