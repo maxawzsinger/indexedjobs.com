@@ -23,9 +23,6 @@ The script is currently scraping jobs in Sydney and deriving standard data from 
 
 ### Urgent Tasks
 
-- **Implement Pagination:**
-  - Add pagination to the jobs list component, it is already lagging on mobile devices.
-  - Implement paginated backend querying.
 - **Enhance Type Safety:**
   - Explore type safety when retrieving row values from TanStack Table... currently casting some values to the desired/known type in JSX.
   - Validate data coming from backend.
@@ -39,6 +36,7 @@ The script is currently scraping jobs in Sydney and deriving standard data from 
 #### Performance
 
 - **Database Optimization:** Move the database from the US West to the Sydney region for faster DB calls.
+- **Implement Pagination:** Implement paginated backend querying.
 
 #### Cosmetic
 

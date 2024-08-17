@@ -15,14 +15,20 @@ import {
   getFacetedMinMaxValues,
   getFacetedUniqueValues,
   getFacetedRowModel,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 import { columns, getFilters } from "../data";
 import { JobsFilters } from "./job-filters";
 import { ContentDrawer } from "../../../ui/content-drawer";
 import { JobData } from "@/app/jobs/au/types";
+import { Button } from "@/app/ui/button";
 
 export const Jobs = ({ data }: { data: JobData[] }) => {
   const [selectedJobId, setSelectedJobId] = useState<string>();
+  const [pagination, setPagination] = useState({
+    pageIndex: 0, //initial page index
+    pageSize: 20, //default page size
+  });
 
   const { urlSearchParams } = useURLSearchParams();
 
@@ -34,8 +40,11 @@ export const Jobs = ({ data }: { data: JobData[] }) => {
     getFacetedRowModel: getFacetedRowModel(), // if you need a list of values for a column (other faceted row models depend on this one)
     getFacetedMinMaxValues: getFacetedMinMaxValues(), // if you need min/max values
     getFacetedUniqueValues: getFacetedUniqueValues(), // if you need a list of unique values
+    getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setPagination, //update the pagination state when internal APIs mutate the pagination state
     state: {
       columnFilters: urlSearchParams,
+      pagination,
     },
   });
 
@@ -61,6 +70,25 @@ export const Jobs = ({ data }: { data: JobData[] }) => {
           onSelectJob={(id) => setSelectedJobId(id)}
           currentJobSelectionId={selectedJobId}
         />
+        <div className="flex justify-center items-center ">
+          <Button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+            variant={"link"}
+            className="w-10 flex justify-center items-center"
+          >
+            {"<"}
+          </Button>
+          {`Page ${pagination.pageIndex + 1}`}
+          <Button
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+            variant={"link"}
+            className="w-10 flex justify-center items-center"
+          >
+            {">"}
+          </Button>
+        </div>
       </div>
       <div className="flex-1 hidden md:block">
         <JobDetail
