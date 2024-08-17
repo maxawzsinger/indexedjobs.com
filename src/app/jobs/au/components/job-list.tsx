@@ -18,7 +18,7 @@ export const JobList = ({
   currentJobSelectionId?: string;
 }) => {
   return (
-    <ScrollArea className="h-[calc(100vh-15rem)] md:h-[calc(100vh-11rem)]">
+    <ScrollArea className="h-[calc(100dvh-15rem)] md:h-[calc(100vh-11rem)]">
       <div className="flex flex-col gap-2 p-4 pt-0">
         {rows.length > 0 ? (
           rows.map((row) => (
