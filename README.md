@@ -26,8 +26,6 @@ The script is currently scraping jobs in Sydney and deriving standard data from 
 - **Enhance Type Safety:**
   - Explore type safety when retrieving row values from TanStack Table... currently casting some values to the desired/known type in JSX.
   - Validate data coming from backend.
-- **Implement Search:**
-- Add keyword/vector distance search functionality.
 - **Filter Labels:** Ensure filter labels remain visible after a value is chosen and can remove filtering without having to search for value.
 - **Type safe URL search parameters:** Enhance type safety when values from the database are cast to strings and put into URL search parameters.
 
