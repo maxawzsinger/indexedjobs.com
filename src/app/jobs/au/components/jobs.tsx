@@ -40,8 +40,6 @@ export const Jobs = ({ data }: { data: JobData[] }) => {
     delayMS: 300,
   });
 
-  console.log("render", Date.now());
-
   const { urlSearchParams } = useURLSearchParams();
 
   const table = useReactTable({
@@ -73,7 +71,7 @@ export const Jobs = ({ data }: { data: JobData[] }) => {
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Search"
-              className="pl-8"
+              className="pl-8 text-base"
               onChange={(e) => {
                 debouncedSearchStringSetter(e.target.value);
               }} // Update searchString on change
