@@ -22,6 +22,7 @@ import { JobsFilters } from "./job-filters";
 import { ContentDrawer } from "../../../ui/content-drawer";
 import { JobData } from "@/app/jobs/au/types";
 import { Button } from "@/app/ui/button";
+import { useDebounce } from "../hooks/use-debounce";
 
 export const Jobs = ({ data }: { data: JobData[] }) => {
   const [selectedJobId, setSelectedJobId] = useState<string>();
@@ -29,6 +30,17 @@ export const Jobs = ({ data }: { data: JobData[] }) => {
     pageIndex: 0, //initial page index
     pageSize: 20, //default page size
   });
+
+  const [searchString, setSearchString] = useState(""); // State for search input (UI)
+
+  const debouncedSearchStringSetter = useDebounce({
+    callback: (searchStringInput: string) => {
+      setSearchString(searchStringInput);
+    },
+    delayMS: 300,
+  });
+
+  console.log("render", Date.now());
 
   const { urlSearchParams } = useURLSearchParams();
 
@@ -45,7 +57,9 @@ export const Jobs = ({ data }: { data: JobData[] }) => {
     state: {
       columnFilters: urlSearchParams,
       pagination,
+      globalFilter: searchString, // Add globalFilter to state
     },
+    globalFilterFn: "includesString",
   });
 
   return (
@@ -57,7 +71,13 @@ export const Jobs = ({ data }: { data: JobData[] }) => {
         <div className="p-4">
           <div className="relative">
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input placeholder="Search" className="pl-8" />
+            <Input
+              placeholder="Search"
+              className="pl-8"
+              onChange={(e) => {
+                debouncedSearchStringSetter(e.target.value);
+              }} // Update searchString on change
+            />
             <div className="md:hidden pt-6">
               <ContentDrawer buttonLabel="Filters">
                 <JobsFilters filters={getFilters(table)} />
@@ -70,7 +90,7 @@ export const Jobs = ({ data }: { data: JobData[] }) => {
           onSelectJob={(id) => setSelectedJobId(id)}
           currentJobSelectionId={selectedJobId}
         />
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center">
           <Button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
