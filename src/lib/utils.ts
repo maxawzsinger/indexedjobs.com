@@ -8,7 +8,7 @@ export const cn = (...inputs: ClassValue[]) => {
 export const generate10KIncrements = ([start, end]: [
   number,
   number
-]): number[] => {
+]): string[] => {
   const increment = 10000;
   const result: number[] = [];
 
@@ -24,7 +24,7 @@ export const generate10KIncrements = ([start, end]: [
     result.push(end);
   }
 
-  return result;
+  return result.map((el) => el.toString());
 };
 
 export const debounce = <T extends (...args: any[]) => any>(
@@ -40,4 +40,11 @@ export const debounce = <T extends (...args: any[]) => any>(
       func.apply(null, args);
     }, delay);
   };
+};
+
+export const getMidnightUnixTimestampDaysAgo = (daysAgo: number) => {
+  const date = new Date();
+  date.setDate(date.getDate() - daysAgo);
+  date.setHours(0, 0, 0, 0); // Set to midnight
+  return Math.floor(date.getTime() / 1000); // Convert to Unix timestamp
 };

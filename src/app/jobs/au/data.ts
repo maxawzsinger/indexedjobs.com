@@ -1,5 +1,8 @@
 import { ColumnDef, Table, createColumnHelper } from "@tanstack/react-table";
-import { generate10KIncrements } from "@/lib/utils";
+import {
+  generate10KIncrements,
+  getMidnightUnixTimestampDaysAgo,
+} from "@/lib/utils";
 import { AllowedFilters } from "@/app/jobs/au/hooks/use-url-search-params";
 import { JobData } from "@/app/jobs/au/types";
 
@@ -17,18 +20,18 @@ export const columns: ColumnDef<JobData, any>[] = [
   columnHelper.accessor("date_posted_unix_ts", {
     header: "Date Posted",
     filterFn: (row, columnId, filterValue) =>
-      Number(row.getValue(columnId)) >= filterValue,
+      Number(row.getValue(columnId)) >= Number(filterValue),
   }),
   columnHelper.accessor("description", { header: "Description" }),
   columnHelper.accessor("advertised_maximum_salary", {
     header: "Max Salary",
     filterFn: (row, columnId, filterValue) =>
-      Number(row.getValue(columnId)) >= filterValue,
+      Number(row.getValue(columnId)) >= Number(filterValue),
   }),
   columnHelper.accessor("advertised_minimum_salary", {
     header: "Min Salary",
     filterFn: (row, columnId, filterValue) =>
-      Number(row.getValue(columnId)) >= filterValue,
+      Number(row.getValue(columnId)) >= Number(filterValue),
   }),
   columnHelper.accessor("advertised_salary_interval", {
     header: "Salary Interval",
@@ -52,7 +55,7 @@ export const columns: ColumnDef<JobData, any>[] = [
 export type filtersType = {
   colName: keyof AllowedFilters;
   label: string;
-  options: { label: string; value: string | number }[];
+  options: { label: string; value: string }[];
 }[];
 export const getFilters = (table: Table<JobData>): filtersType => {
   return [
@@ -118,7 +121,29 @@ export const getFilters = (table: Table<JobData>): filtersType => {
         table
           .getColumn("advertised_minimum_salary")
           ?.getFacetedMinMaxValues() ?? [0, 0]
-      ).map((key) => ({ label: key.toString(), value: key })),
+      ).map((key) => ({ label: key, value: key })),
+    },
+    {
+      colName: "date_posted_unix_ts",
+      label: "Date posted",
+      options: [
+        {
+          label: "1 month ago",
+          value: getMidnightUnixTimestampDaysAgo(30).toString(),
+        },
+        {
+          label: "2 weeks ago",
+          value: getMidnightUnixTimestampDaysAgo(14).toString(),
+        },
+        {
+          label: "1 week ago",
+          value: getMidnightUnixTimestampDaysAgo(7).toString(),
+        },
+        {
+          label: "In the last day",
+          value: getMidnightUnixTimestampDaysAgo(1).toString(),
+        },
+      ],
     },
   ];
 };

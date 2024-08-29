@@ -30,7 +30,7 @@ export const Combobox = ({
   currentSelection?: string;
 }) => {
   const [open, setOpen] = React.useState(false);
-
+  console.log(options);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -55,7 +55,7 @@ export const Combobox = ({
               {options.map((option) => (
                 <CommandItem
                   key={option.value}
-                  value={option.value?.toString()}
+                  value={option.value}
                   onSelect={(value) => {
                     if (currentSelection === value) {
                       onReset();

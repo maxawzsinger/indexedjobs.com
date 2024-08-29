@@ -23,8 +23,8 @@ The script is currently scraping jobs in Sydney and deriving standard data from 
 
 ### Urgent Tasks
 
-- **Enhance Data Safety:**
-  - Validate data coming from backend.
+- **Enhance Type Safety:**
+  - Ensure we are accessing col names with column helpers where needed. Validate data coming from backend.
 - **Filter Labels:** Ensure filter labels remain visible after a value is chosen and can remove filtering without having to search for value.
 - **Type safe URL search parameters:** Enhance type safety when values from the database are cast to strings and put into URL search parameters.
 

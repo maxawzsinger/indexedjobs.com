@@ -20,14 +20,10 @@ export function useURLSearchParams() {
   const searchParams = useSearchParams();
 
   const urlSearchParams = useMemo(() => {
-    return Array.from(searchParams.entries()).map(([id, value]) => {
-      if (id === "advertised_minimum_salary" || id === "date_posted_unix_ts")
-        return { id, value: Number(value) };
-      return {
-        id,
-        value,
-      };
-    });
+    return Array.from(searchParams.entries()).map(([id, value]) => ({
+      id,
+      value,
+    }));
   }, [searchParams]);
 
   // Function to add or update a parameter in the search params
