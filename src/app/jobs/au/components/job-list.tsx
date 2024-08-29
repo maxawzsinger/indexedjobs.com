@@ -30,13 +30,11 @@ export const JobList = ({
               )}
               onClick={() => onSelectJob(row.id)}
             >
-              {row.renderValue("title")}
+              {row.original.title}
               <div className="flex w-full flex-col gap-1 text-xs">
                 <div className="flex items-center">
                   <div className="flex items-center gap-2">
-                    <div className="font-semibold">
-                      {row.renderValue("company")}
-                    </div>
+                    <div className="font-semibold">{row.original.company}</div>
                   </div>
                   <div
                     className={cn(
@@ -47,9 +45,7 @@ export const JobList = ({
                     )}
                   >
                     {formatDistanceToNow(
-                      new Date(
-                        Number(row.getValue("date_posted_unix_ts")) * 1000
-                      ),
+                      new Date(row.original.date_posted_unix_ts * 1000),
                       {
                         addSuffix: true,
                       }
@@ -57,35 +53,29 @@ export const JobList = ({
                   </div>
                 </div>
                 <div className="text-xs font-medium">
-                  {`${row.renderValue("location_suburb")}, ${row.renderValue(
-                    "location_state"
-                  )} (${row.renderValue("office_type")})`}
+                  {`${row.original.location_suburb}, ${row.original.location_state} (${row.original.office_type})`}
                 </div>
               </div>
               <div className="text-xs text-muted-foreground">
                 <span className="font-bold">Salary: </span>
-                {`$${row.renderValue(
-                  "advertised_minimum_salary"
-                )} - ${row.renderValue(
-                  "advertised_maximum_salary"
-                )} (${row.renderValue("advertised_salary_interval")})`}
+                {`$${row.original.advertised_minimum_salary} - ${row.original.advertised_maximum_salary} (${row.original.advertised_salary_interval})`}
               </div>
               <div className="flex-1 whitespace-pre-wrap text-xs space-y-4 md:hidden">
                 <div className="line-clamp-2">
                   <span className="font-bold">Responsibilities: </span>
-                  {row.renderValue("key_responsibilities")}
+                  {row.original.key_responsibilities}
                 </div>
                 <div className="line-clamp-2">
                   <span className="font-bold">Required technical skills: </span>
-                  {row.renderValue("key_required_technical_skills")}
+                  {row.original.key_required_technical_skills}
                 </div>
                 <div className="line-clamp-2">
                   <span className="font-bold">Required experience: </span>
-                  {row.renderValue("required_experience")}
+                  {row.original.required_experience}
                 </div>
                 <div className="font-bold underline">
                   <a
-                    href={row.getValue("job_url")}
+                    href={row.original.job_url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -93,7 +83,7 @@ export const JobList = ({
                   </a>
                 </div>
               </div>
-              {row.renderValue("non_profit_status") === "non_profit" ? (
+              {row.original.non_profit_status === "non_profit" ? (
                 <Badge variant="default">Non profit</Badge>
               ) : null}
             </button>

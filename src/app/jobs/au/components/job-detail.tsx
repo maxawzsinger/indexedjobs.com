@@ -17,18 +17,14 @@ export const JobDetail = ({ job }: JobDetailProps) => {
           <div className="flex items-start p-4">
             <div className="flex items-start gap-4 text-sm">
               <div className="grid gap-1">
-                <div className="font-semibold">{job.renderValue("title")}</div>
-                <div className="font-semibold">{`${job.renderValue(
-                  "location_suburb"
-                )}, ${job.renderValue("location_state")} (${job.renderValue(
-                  "office_type"
-                )})`}</div>
-                <div className="text-xs">{job.renderValue("company")}</div>
+                <div className="font-semibold">{job.original.title}</div>
+                <div className="font-semibold">{`${job.original.location_suburb}, ${job.original.location_state} (${job.original.office_type})`}</div>
+                <div className="text-xs">{job.original.company}</div>
               </div>
             </div>
             <div className="ml-auto text-xs text-muted-foreground">
               {format(
-                new Date(Number(job.renderValue("date_posted_unix_ts")) * 1000),
+                new Date(job.original.date_posted_unix_ts * 1000),
                 "PPpp"
               )}
             </div>
@@ -38,31 +34,27 @@ export const JobDetail = ({ job }: JobDetailProps) => {
           <div className="flex-1 whitespace-pre-wrap p-4 text-sm space-y-4">
             <div>
               <span className="font-bold">Salary: </span>
-              {`$${job.renderValue(
-                "advertised_minimum_salary"
-              )} - ${job.renderValue(
-                "advertised_maximum_salary"
-              )} (${job.renderValue("advertised_salary_interval")})`}
+              {`$${job.original.advertised_minimum_salary} - ${job.original.advertised_maximum_salary} (${job.original.advertised_salary_interval})`}
             </div>
             <div>
               <span className="font-bold">Responsibilities: </span>
-              {job.renderValue("key_responsibilities")}
+              {job.original.key_responsibilities}
             </div>
             <div>
               <span className="font-bold">Required technical skills: </span>
-              {job.renderValue("key_required_technical_skills")}
+              {job.original.key_required_technical_skills}
             </div>
             <div>
               <span className="font-bold">Required experience: </span>
-              {job.renderValue("required_experience")}
+              {job.original.required_experience}
             </div>
             <div className="text-xs font-bold underline">
               <a
-                href={job.getValue("job_url")}
+                href={job.original.job_url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Full job description
+                Link to full job description (opens in new tab)
               </a>
             </div>
           </div>

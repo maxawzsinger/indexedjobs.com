@@ -23,11 +23,8 @@ The script is currently scraping jobs in Sydney and deriving standard data from 
 
 ### Urgent Tasks
 
-- **Enhance Type Safety:**
-  - Explore type safety when retrieving row values from TanStack Table... currently casting some values to the desired/known type in JSX.
+- **Enhance Data Safety:**
   - Validate data coming from backend.
-- **Implement Search:**
-- Add keyword/vector distance search functionality.
 - **Filter Labels:** Ensure filter labels remain visible after a value is chosen and can remove filtering without having to search for value.
 - **Type safe URL search parameters:** Enhance type safety when values from the database are cast to strings and put into URL search parameters.
 
@@ -47,7 +44,6 @@ The script is currently scraping jobs in Sydney and deriving standard data from 
 ### Non-Urgent Tasks
 
 - **Responsive Scroll Area:** Rewrite scroll area height calculation for responsiveness not calc.
-- **Fallback Value in TanStack Table:** Add fallback value to `TanStackTable`'s `renderValue` function.
 - **URL Search Params:** Update `use-url-search-params` to use Next.js APIs instead of the window API for route changes for consistency.
 - **DB Schema Redesign:** Redesign the database schema to third normal form.
 - **Lambda Script Logging:** Enhance logging within the Lambda script.

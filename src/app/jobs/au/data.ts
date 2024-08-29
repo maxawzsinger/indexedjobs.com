@@ -1,95 +1,52 @@
-import { ColumnDef, Table } from "@tanstack/react-table";
+import { ColumnDef, Table, createColumnHelper } from "@tanstack/react-table";
 import { generate10KIncrements } from "@/lib/utils";
 import { AllowedFilters } from "@/app/jobs/au/hooks/use-url-search-params";
 import { JobData } from "@/app/jobs/au/types";
 
+const columnHelper = createColumnHelper<JobData>();
 export const columns: ColumnDef<JobData, any>[] = [
-  {
-    accessorKey: "job_spy_id",
-    header: "Job Spy ID",
-  },
-  {
-    accessorKey: "site",
-    header: "Site",
-  },
-  {
-    accessorKey: "job_url",
-    header: "Job URL",
-  },
-  {
-    accessorKey: "job_url_direct",
-    header: "Direct Job URL",
-  },
-  {
-    accessorKey: "title",
-    header: "Title",
-  },
-  {
-    accessorKey: "company",
-    header: "Company",
-  },
-  {
-    accessorKey: "location_suburb",
-    header: "Suburb",
-  },
-  {
-    accessorKey: "location_state",
-    header: "State",
-  },
-  {
-    accessorKey: "location_country",
-    header: "Country",
-  },
-  {
-    accessorKey: "date_posted_unix_ts",
+  columnHelper.accessor("job_spy_id", { header: "Job Spy ID" }),
+  columnHelper.accessor("site", { header: "Site" }),
+  columnHelper.accessor("job_url", { header: "Job URL" }),
+  columnHelper.accessor("job_url_direct", { header: "Direct Job URL" }),
+  columnHelper.accessor("title", { header: "Title" }),
+  columnHelper.accessor("company", { header: "Company" }),
+  columnHelper.accessor("location_suburb", { header: "Suburb" }),
+  columnHelper.accessor("location_state", { header: "State" }),
+  columnHelper.accessor("location_country", { header: "Country" }),
+  columnHelper.accessor("date_posted_unix_ts", {
     header: "Date Posted",
     filterFn: (row, columnId, filterValue) =>
       Number(row.getValue(columnId)) >= filterValue,
-  },
-  {
-    accessorKey: "description",
-    header: "Description",
-  },
-  {
-    accessorKey: "advertised_maximum_salary",
+  }),
+  columnHelper.accessor("description", { header: "Description" }),
+  columnHelper.accessor("advertised_maximum_salary", {
     header: "Max Salary",
     filterFn: (row, columnId, filterValue) =>
       Number(row.getValue(columnId)) >= filterValue,
-  },
-  {
-    accessorKey: "advertised_minimum_salary",
+  }),
+  columnHelper.accessor("advertised_minimum_salary", {
     header: "Min Salary",
     filterFn: (row, columnId, filterValue) =>
       Number(row.getValue(columnId)) >= filterValue,
-  },
-  {
-    accessorKey: "advertised_salary_interval",
+  }),
+  columnHelper.accessor("advertised_salary_interval", {
     header: "Salary Interval",
-  },
-  {
-    accessorKey: "office_type",
-    header: "Office Type",
-  },
-  {
-    accessorKey: "non_profit_status",
-    header: "Non-Profit",
-  },
-  {
-    accessorKey: "minimum_required_education",
+  }),
+  columnHelper.accessor("office_type", { header: "Office Type" }),
+  columnHelper.accessor("non_profit_status", { header: "Non-Profit" }),
+  columnHelper.accessor("minimum_required_education", {
     header: "Minimum Education",
-  },
-  {
-    accessorKey: "key_responsibilities",
+  }),
+  columnHelper.accessor("key_responsibilities", {
     header: "Key Responsibilities",
-  },
-  {
-    accessorKey: "key_required_technical_skills",
+  }),
+  columnHelper.accessor("key_required_technical_skills", {
     header: "Key Skills",
-  },
-  {
-    accessorKey: "required_experience",
+  }),
+  columnHelper.accessor("required_experience", {
     header: "Experience Required",
-  },
+  }),
 ];
 
 export type filtersType = {
