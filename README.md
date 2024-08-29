@@ -48,6 +48,8 @@ The script is currently scraping jobs in Sydney and deriving standard data from 
 - **DB Schema Redesign:** Redesign the database schema to third normal form.
 - **Lambda Script Logging:** Enhance logging within the Lambda script.
 - **Type Generation from Supabase:** Investigate type generation from Supabase to make the Lambda function typesafe.
+- **Store old postings in s3 cold storage**
+- **look into nextjs cache busting for supabase client on local builds**
 
 ---
 

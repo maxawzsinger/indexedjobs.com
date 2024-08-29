@@ -18,6 +18,8 @@ const JobsPage = async () => {
   // const data = dummyData;
   // const error = false;
 
+  console.log(data);
+
   return (
     <>
       <div className="flex-col">
